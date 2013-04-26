@@ -38,11 +38,13 @@ describe('zookeeper_watcher.test.js', function () {
 
   beforeEach(function () {
     zk.unWatch('/root');
+    should.not.exists(zk.watcher.data['/root']);
   });
 
   it('should watch /root and get value', function (done) {
     done = pedding(5, done); // 2 get, 2 change, 1 set
     zk.watch('/root', function (err, value, zstat) {
+      zk.watcher.data['/root'].should.length(1);
       should.not.exists(err);
       value.should.be.instanceof(Buffer);
       value.toString().should.include('root');
@@ -53,12 +55,13 @@ describe('zookeeper_watcher.test.js', function () {
 
     // watch again should be fine.
     zk.watch('/root', function (err, value, zstat) {
+      zk.watcher.data['/root'].should.length(1);
       should.not.exists(err);
       value.should.be.instanceof(Buffer);
       value.toString().should.include('root');
       zstat.should.have.property('version');
       zstat.should.have.property('ctime');
-      console.log(value.toString(), zstat);
+      // console.log(value.toString(), zstat);
       done();
     });
 
@@ -70,6 +73,32 @@ describe('zookeeper_watcher.test.js', function () {
         done();
       });
     }, 1500);
+  });
+
+  it('should restart after expired', function (done) {
+    done = pedding(3, done);
+
+    var expired = false;
+    zk.watch('/root', function (err, value, zstat) {
+      zk.watcher.data['/root'].should.length(1);
+      !expired && zk.onEnsembleExpired();
+      expired = true;
+      // console.log(zstat)
+      done(err);
+    });
+
+    // after started, change it
+    zk.once('started', function (err) {
+      // will auto watch
+      zk.watcher.data['/root'].should.length(1);
+      should.not.exists(err);
+      zk.set('/root', 'root value change at ' + new Date(), version, function (err, zstat) {
+        should.not.exists(err);
+        version = zstat.version;
+        done();
+      });
+    });
+
   });
 
 });
