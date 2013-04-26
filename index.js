@@ -1,0 +1,1 @@
+module.exports = process.env.ZOOKEEPER_WATCHER_COV ? require('./lib-cov/zookeeper-watcher') : require('./lib/zookeeper-watcher');
