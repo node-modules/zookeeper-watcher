@@ -7,7 +7,7 @@
     "test": "make test"
   },
   "dependencies": {
-    "zkjs": "*"
+    "zkjs": ">=3.4.1"
   },
   "devDependencies": {
     "should": "*",
