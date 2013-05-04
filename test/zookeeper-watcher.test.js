@@ -25,10 +25,11 @@ describe('zookeeper_watcher.test.js', function () {
   var version = 0;
 
   before(function (done) {
-    zk.start(function (err) {
-      should.not.exists(err);
-      zk.create('/root', 'this is root ' + new Date(), function () {
-        zk.get('/root', function (err, value, zstat) {
+    zk.once('connected', function () {
+      zk.create('/root', 'this is root ' + new Date(), function (err) {
+        // should.not.exists(err);
+        zk.getData('/root', function (err, value, zstat) {
+          should.not.exists(err);
           version = zstat.version;
           done(err);
         });
@@ -36,15 +37,19 @@ describe('zookeeper_watcher.test.js', function () {
     });
   });
 
+  after(function (done) {
+    zk.close(done);
+  });
+
   beforeEach(function () {
     zk.unWatch('/root');
-    should.not.exists(zk.watcher.data['/root']);
+    // should.not.exists(zk.watcher.data['/root']);
   });
 
   it('should watch /root and get value', function (done) {
     done = pedding(5, done); // 2 get, 2 change, 1 set
     zk.watch('/root', function (err, value, zstat) {
-      zk.watcher.data['/root'].should.length(1);
+      // zk.watcher.data['/root'].should.length(1);
       should.not.exists(err);
       value.should.be.instanceof(Buffer);
       value.toString().should.include('root');
@@ -55,7 +60,7 @@ describe('zookeeper_watcher.test.js', function () {
 
     // watch again should be fine.
     zk.watch('/root', function (err, value, zstat) {
-      zk.watcher.data['/root'].should.length(1);
+      // zk.watcher.data['/root'].should.length(1);
       should.not.exists(err);
       value.should.be.instanceof(Buffer);
       value.toString().should.include('root');
@@ -80,18 +85,16 @@ describe('zookeeper_watcher.test.js', function () {
 
     var expired = false;
     zk.watch('/root', function (err, value, zstat) {
-      zk.watcher.data['/root'].should.length(1);
-      !expired && zk.onEnsembleExpired();
+      // !expired && zk.onEnsembleExpired();
+      !expired && zk.zk.connectionManager.setState(-3); // SESSION_EXPIRED
       expired = true;
-      // console.log(zstat)
       done(err);
     });
 
     // after started, change it
-    zk.once('started', function (err) {
+    zk.once('connected', function () {
+      // console.log('connected')
       // will auto watch
-      zk.watcher.data['/root'].should.length(1);
-      should.not.exists(err);
       zk.set('/root', 'root value change at ' + new Date(), version, function (err, zstat) {
         should.not.exists(err);
         version = zstat.version;
