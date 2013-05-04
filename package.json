@@ -7,7 +7,7 @@
     "test": "make test"
   },
   "dependencies": {
-    "zkjs": ">=3.4.1"
+    "node-zookeeper-client": ">=0.0.1"
   },
   "devDependencies": {
     "should": "*",

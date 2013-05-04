@@ -19,11 +19,11 @@ $ npm install zookeeper-watcher
 var ZookeeperWatcher = require('zookeeper-watcher');
 
 var zk = new ZookeeperWatcher({
-  hosts: [127.0.0.1:2181],
+  hosts: ['127.0.0.1:2181'],
   root: '/zktest'
 });
 
-zk.start(function (err) {
+zk.once('connected', function (err) {
   
   zk.watch('/root', function (err, value, zstat) {
     console.log(arguments);
