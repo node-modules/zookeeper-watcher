@@ -17,7 +17,7 @@ var pedding = require('pedding');
 describe('zookeeper_watcher.test.js', function () {
   
   var zk = new ZooKeeperWatcher({
-    hosts: ['api.yongwo.de:2181'],
+    hosts: ['api.yongwo.de:2181', 'api.yongwo.de:2181'],
     root: '/zkjs-test',
     // logger: console,
   });

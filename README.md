@@ -3,7 +3,9 @@ zookeeper-watcher [![Build Status](https://secure.travis-ci.org/fengmk2/zookeepe
 
 ![logo](https://raw.github.com/fengmk2/zookeeper-watcher/master/logo.png)
 
-Extend [zkjs](https://github.com/dannycoates/zkjs), let zookeeper client support `watch(path)` method.
+~~Extend [zkjs](https://github.com/dannycoates/zkjs), let zookeeper client support `watch(path)` method.~~
+
+Extend [node-zookeeper-client](https://github.com/alexguan/node-zookeeper-client), let zookeeper client support `watch(path)` method.
 
 * jscoverage: [100%](http://fengmk2.github.com/coverage/zookeeper-watcher.html)
 
