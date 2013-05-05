@@ -18,7 +18,7 @@ describe('zookeeper_watcher.test.js', function () {
   
   var zk = new ZooKeeperWatcher({
     hosts: ['api.yongwo.de:2181', 'api.yongwo.de:2181'],
-    root: '/zkjs-test',
+    root: '/zkw-test-' + process.version.replace(/\./g, '-'),
     // logger: console,
   });
 
@@ -26,14 +26,26 @@ describe('zookeeper_watcher.test.js', function () {
 
   before(function (done) {
     zk.once('connected', function () {
-      zk.create('/root', 'this is root ' + new Date(), function (err) {
-        // should.not.exists(err);
-        zk.getData('/root', function (err, value, zstat) {
-          should.not.exists(err);
-          version = zstat.version;
-          done(err);
+      // ensure parent path exists
+      zk.mkdirp('/', function (err, path) {
+        should.not.exists(err);
+        path.should.equal('/');
+        zk.create('/root', function (err) {
+          // should.not.exists(err);
+          zk.get('/root', function (err, value, zstat) {
+            // console.log(arguments)
+            should.not.exists(err);
+            version = zstat.version;
+            zk.set('/root', 'this is root ' + new Date(), version, function (err, zstat) {
+              should.not.exists(err);
+              version = zstat.version;
+              done();
+            });
+            
+          });
         });
       });
+      
     });
   });
 
@@ -43,7 +55,6 @@ describe('zookeeper_watcher.test.js', function () {
 
   beforeEach(function () {
     zk.unWatch('/root');
-    // should.not.exists(zk.watcher.data['/root']);
   });
 
   it('should watch /root and get value', function (done) {

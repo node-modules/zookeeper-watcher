@@ -1,4 +1,10 @@
 
+0.1.1 / 2013-05-05 
+==================
+
+  * fixed connectionString path bug
+  * update travis
+
 0.1.0 / 2013-05-04 
 ==================
 
