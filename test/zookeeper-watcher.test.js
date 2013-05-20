@@ -18,6 +18,8 @@ describe('zookeeper_watcher.test.js', function () {
   
   var zk = new ZooKeeperWatcher({
     hosts: ['api.yongwo.de:2181', 'api.yongwo.de:2181'],
+    // hosts: ['api.yongwo.de:2182'],
+    sessionTimeout: 5000,
     root: '/zkw-test-' + process.version.replace(/\./g, '-'),
     // logger: console,
   });
