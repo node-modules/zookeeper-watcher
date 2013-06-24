@@ -1,4 +1,4 @@
-zookeeper-watcher [![Build Status](https://secure.travis-ci.org/fengmk2/zookeeper-watcher.png)](http://travis-ci.org/fengmk2/zookeeper-watcher)
+zookeeper-watcher [![Build Status](https://secure.travis-ci.org/fengmk2/zookeeper-watcher.png)](http://travis-ci.org/fengmk2/zookeeper-watcher) [![Coverage Status](https://coveralls.io/repos/fengmk2/zookeeper-watcher/badge.png)](https://coveralls.io/r/fengmk2/zookeeper-watcher)
 =======
 
 ![logo](https://raw.github.com/fengmk2/zookeeper-watcher/master/logo.png)
@@ -6,8 +6,6 @@ zookeeper-watcher [![Build Status](https://secure.travis-ci.org/fengmk2/zookeepe
 ~~Extend [zkjs](https://github.com/dannycoates/zkjs), let zookeeper client support `watch(path)` method.~~
 
 Extend [node-zookeeper-client](https://github.com/alexguan/node-zookeeper-client), let zookeeper client support `watch(path)` method.
-
-* jscoverage: [94%](http://fengmk2.github.com/coverage/zookeeper-watcher.html)
 
 ## Install
 
