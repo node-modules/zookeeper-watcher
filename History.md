@@ -1,4 +1,13 @@
 
+0.2.0 / 2013-09-11 
+==================
+
+  * auto reconnect add 20s default timeout fixed #1
+  * support coveralls
+  * update node-zookeeper-client
+  * use blanket instead of jscover
+  * update node-zookeeper-client to 0.0.4
+
 0.1.1 / 2013-05-05 
 ==================
 

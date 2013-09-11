@@ -20,7 +20,8 @@ var ZookeeperWatcher = require('zookeeper-watcher');
 
 var zk = new ZookeeperWatcher({
   hosts: ['127.0.0.1:2181'],
-  root: '/zktest'
+  root: '/zktest',
+  // reconnectTimeout: 20000, // default auto reconnect timeout: 20 seconds
 });
 
 zk.once('connected', function (err) {
