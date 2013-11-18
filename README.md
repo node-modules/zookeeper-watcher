@@ -1,6 +1,8 @@
 zookeeper-watcher [![Build Status](https://secure.travis-ci.org/fengmk2/zookeeper-watcher.png)](http://travis-ci.org/fengmk2/zookeeper-watcher) [![Coverage Status](https://coveralls.io/repos/fengmk2/zookeeper-watcher/badge.png)](https://coveralls.io/r/fengmk2/zookeeper-watcher)
 =======
 
+[![NPM](https://nodei.co/npm/zookeeper-watcher.png?downloads=true&stars=true)](https://nodei.co/npm/zookeeper-watcher)
+
 ![logo](https://raw.github.com/fengmk2/zookeeper-watcher/master/logo.png)
 
 ~~Extend [zkjs](https://github.com/dannycoates/zkjs), let zookeeper client support `watch(path)` method.~~
@@ -25,7 +27,7 @@ var zk = new ZookeeperWatcher({
 });
 
 zk.once('connected', function (err) {
-  
+
   zk.watch('/root', function (err, value, zstat) {
     console.log(arguments);
   });
@@ -33,7 +35,7 @@ zk.once('connected', function (err) {
 });
 ```
 
-## License 
+## License
 
 (The MIT License)
 
