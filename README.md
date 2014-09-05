@@ -1,9 +1,27 @@
-zookeeper-watcher [![Build Status](https://secure.travis-ci.org/fengmk2/zookeeper-watcher.png)](http://travis-ci.org/fengmk2/zookeeper-watcher) [![Coverage Status](https://coveralls.io/repos/fengmk2/zookeeper-watcher/badge.png)](https://coveralls.io/r/fengmk2/zookeeper-watcher)
-=======
+# zookeeper-watcher
 
-[![NPM](https://nodei.co/npm/zookeeper-watcher.png?downloads=true&stars=true)](https://nodei.co/npm/zookeeper-watcher)
+[![NPM version][npm-image]][npm-url]
+[![build status][travis-image]][travis-url]
+[![Test coverage][coveralls-image]][coveralls-url]
+[![Gittip][gittip-image]][gittip-url]
+[![David deps][david-image]][david-url]
+[![node version][node-image]][node-url]
+[![npm download][download-image]][download-url]
 
-![logo](https://raw.github.com/fengmk2/zookeeper-watcher/master/logo.png)
+[npm-image]: https://img.shields.io/npm/v/zookeeper-watcher.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/zookeeper-watcher
+[travis-image]: https://img.shields.io/travis/node-modules/zookeeper-watcher.svg?style=flat-square
+[travis-url]: https://travis-ci.org/node-modules/zookeeper-watcher
+[coveralls-image]: https://img.shields.io/coveralls/node-modules/zookeeper-watcher.svg?style=flat-square
+[coveralls-url]: https://coveralls.io/r/node-modules/zookeeper-watcher?branch=master
+[gittip-image]: https://img.shields.io/gittip/fengmk2.svg?style=flat-square
+[gittip-url]: https://www.gittip.com/fengmk2/
+[david-image]: https://img.shields.io/david/node-modules/zookeeper-watcher.svg?style=flat-square
+[david-url]: https://david-dm.org/node-modules/zookeeper-watcher
+[node-image]: https://img.shields.io/badge/node.js-%3E=_0.10-green.svg?style=flat-square
+[node-url]: http://nodejs.org/download/
+[download-image]: https://img.shields.io/npm/dm/zookeeper-watcher.svg?style=flat-square
+[download-url]: https://npmjs.org/package/zookeeper-watcher
 
 ~~Extend [zkjs](https://github.com/dannycoates/zkjs), let zookeeper client support `watch(path)` method.~~
 
@@ -12,7 +30,7 @@ Extend [node-zookeeper-client](https://github.com/alexguan/node-zookeeper-client
 ## Install
 
 ```bash
-$ npm install zookeeper-watcher
+$ npm install zookeeper-watcher --save
 ```
 
 ## Usage
@@ -27,11 +45,9 @@ var zk = new ZookeeperWatcher({
 });
 
 zk.once('connected', function (err) {
-
   zk.watch('/root', function (err, value, zstat) {
     console.log(arguments);
   });
-
 });
 ```
 
