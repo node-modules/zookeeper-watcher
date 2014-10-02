@@ -15,13 +15,13 @@ var should = require('should');
 var pedding = require('pedding');
 
 describe('zookeeper_watcher.test.js', function () {
-  
+
   var zk = new ZooKeeperWatcher({
-    hosts: ['api.yongwo.de:2181', 'api.yongwo.de:2181'],
-    // hosts: ['api.yongwo.de:2182'],
+    hosts: ['localhost:2181'],
     sessionTimeout: 5000,
+    reconnectTimeout: 500,
     root: '/zkw-test-' + process.version.replace(/\./g, '-'),
-    // logger: console,
+    logger: console,
   });
 
   var version = 0;
@@ -43,11 +43,11 @@ describe('zookeeper_watcher.test.js', function () {
               version = zstat.version;
               done();
             });
-            
+
           });
         });
       });
-      
+
     });
   });
 
@@ -65,7 +65,7 @@ describe('zookeeper_watcher.test.js', function () {
       // zk.watcher.data['/root'].should.length(1);
       should.not.exists(err);
       value.should.be.instanceof(Buffer);
-      value.toString().should.include('root');
+      value.toString().should.match(/.*root.*/);
       zstat.should.have.property('version');
       zstat.should.have.property('ctime');
       done();
@@ -76,7 +76,7 @@ describe('zookeeper_watcher.test.js', function () {
       // zk.watcher.data['/root'].should.length(1);
       should.not.exists(err);
       value.should.be.instanceof(Buffer);
-      value.toString().should.include('root');
+      value.toString().should.match(/.*root.*/);
       zstat.should.have.property('version');
       zstat.should.have.property('ctime');
       // console.log(value.toString(), zstat);
@@ -94,7 +94,7 @@ describe('zookeeper_watcher.test.js', function () {
   });
 
   it('should restart after expired', function (done) {
-    done = pedding(3, done);
+    done = pedding(4, done);
 
     var expired = false;
     zk.watch('/root', function (err, value, zstat) {
@@ -106,7 +106,6 @@ describe('zookeeper_watcher.test.js', function () {
 
     // after started, change it
     zk.once('connected', function () {
-      // console.log('connected')
       // will auto watch
       zk.set('/root', 'root value change at ' + new Date(), version, function (err, zstat) {
         should.not.exists(err);
