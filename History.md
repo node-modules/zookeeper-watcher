@@ -1,4 +1,11 @@
 
+1.0.0 / 2014-10-10
+==================
+
+ * return zk client (@aleafs)
+ * use istanbul for coverage
+ * Fixed travis test
+
 0.2.3 / 2014-10-02
 ==================
 
