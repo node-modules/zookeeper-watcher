@@ -1,6 +1,6 @@
 {
   "name": "zookeeper-watcher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Extend node-zookeeper-client, let zookeeper client support `watch(path)` method.",
   "main": "index.js",
   "scripts": {

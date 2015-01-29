@@ -1,4 +1,9 @@
 
+1.0.1 / 2015-01-29
+==================
+
+ * Don't create new zk client on states: closing, expire, auth_failed (@wision)
+
 1.0.0 / 2014-10-10
 ==================
 
