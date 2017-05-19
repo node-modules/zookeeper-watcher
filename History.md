@@ -1,4 +1,10 @@
 
+1.0.2 / 2017-05-19
+==================
+
+  * deps: use ^
+  * fix: package.json to reduce vulnerabilities (#10)
+
 1.0.1 / 2015-01-29
 ==================
 
