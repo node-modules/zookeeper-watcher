@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "debug": "^2.6.7",
-    "node-zookeeper-client": "~0.2.1"
+    "node-zookeeper-client": "~1.1.2"
   },
   "devDependencies": {
     "contributors": "*",
